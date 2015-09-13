@@ -11,7 +11,7 @@
 #include "trie.h"
 #include "sllNode.h"
 
-/*int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]) {
     int data = 6;
     binarySearchTree<int> bsTree(data);
     bsTree.insert(10);
@@ -29,7 +29,7 @@
     cout<<"Number of leaf nodes in the binary search tree are: "<<bsTree.numLeafNodes()<<endl;
     cout<<"Is tree balanced: "<<bsTree.isTreeBalanced()<<endl;
     return 0;
-}*/
+}
 /*
 int main(int argc, const char * argv[]) {
     trie<char> tr;
@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
     tr.traverse();
 }*/
 
-int main() {
+/*int main() {
     sllNode<int> head(1);
     sllNode<int> *newHead;
     head.addTail(2);
@@ -53,4 +53,4 @@ int main() {
     head.print();
     head.reverse(&head, &newHead);
     newHead->print();
-}
+}*/

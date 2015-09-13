@@ -17,7 +17,7 @@ private:
     binaryNode<T>* mLeft;
     binaryNode<T>* mRight;
 public:
-    binaryNode(const T &data):mData(data),mLeft(nullptr),mRight(nullptr){};
+    binaryNode(const T data):mData(data),mLeft(nullptr),mRight(nullptr){};
     ~binaryNode(){};
     T& getData() {
         return &mData;

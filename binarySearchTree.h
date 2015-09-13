@@ -27,7 +27,7 @@ class binarySearchTree {
     int minDepth(binaryNode<T>* root);
     int isTreeBalanced(binaryNode<T>* root);
 public:
-    binarySearchTree(const T &data);
+    binarySearchTree(const T data);
     ~binarySearchTree();
     void deleteTree();
     void insert(T data);
@@ -40,7 +40,7 @@ public:
 };
 
 template <typename T>
-binarySearchTree<T>::binarySearchTree(const T &data) {
+binarySearchTree<T>::binarySearchTree(const T data) {
     mRoot = new binaryNode<T>(data);
 }
 
