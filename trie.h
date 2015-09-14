@@ -9,6 +9,12 @@
 #ifndef trees_trie_h
 #define trees_trie_h
 
+#include <stdio.h>
+#include <iostream>
+#include "testable.h"
+
+using namespace std;
+
 template <typename T>
 class trieNode {
     template <typename U> friend class trie;
@@ -24,15 +30,16 @@ public:
 };
 
 template <typename T>
-class trie {
+class trie : public testable {
     trieNode<T> *mRoot;
     void traverse(trieNode<T> *root);
     void destroy(trieNode<T> *node);
 public:
     trie();
     ~trie();
-    void insert(T *arr, size_t length);
+    void insert(T arr[], size_t length);
     void traverse();
+    int test();
 };
 
 template <typename T>
@@ -90,11 +97,10 @@ trie<T>::~trie() {
 }
 
 template <typename T>
-void trie<T>::insert(T *data, size_t length) {
+void trie<T>::insert(T data[], size_t length) {
     trieNode<T> *iter = mRoot;
     for (size_t i = 0; i < length; i++) {
-        iter = iter->insertChild(*data);
-        data++;
+        iter = iter->insertChild(data[i]);
     }
 }
 
@@ -111,6 +117,17 @@ void trie<T>::traverse(trieNode<T> *root) {
 template <typename T>
 void trie<T>::traverse() {
     traverse(mRoot);
+}
+
+template <typename T>
+int trie<T>::test() {
+    cout<<"Testing Trie...\n";
+    insert("beauty", strlen("beauty"));
+    insert("beautification", strlen("beautification"));
+    insert("beast", strlen("beast"));
+    traverse();
+    cout<<"Testing Trie done\n";
+    return 0;
 }
 
 #endif

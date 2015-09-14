@@ -11,12 +11,27 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "binaryNode.h"
+#include "testable.h"
 
 using namespace std;
 
 template <typename T>
-class binarySearchTree {
+class binaryNode {
+    template<typename U> friend class binarySearchTree;
+private:
+    T mData;
+    binaryNode<T>* mLeft;
+    binaryNode<T>* mRight;
+public:
+    binaryNode(const T data):mData(data),mLeft(nullptr),mRight(nullptr){};
+    ~binaryNode(){};
+    T getData() {
+        return mData;
+    }
+};
+
+template <typename T>
+class binarySearchTree : public testable {
     binaryNode<T> *mRoot;
     void insert(binaryNode<T>* root, binaryNode<T>* node);
     void deleteTree(binaryNode<T>* root);
@@ -27,6 +42,7 @@ class binarySearchTree {
     int minDepth(binaryNode<T>* root);
     int isTreeBalanced(binaryNode<T>* root);
 public:
+    binarySearchTree();
     binarySearchTree(const T data);
     ~binarySearchTree();
     void deleteTree();
@@ -37,7 +53,12 @@ public:
     int numNodes();
     int numLeafNodes();
     int isTreeBalanced();
+    int test();
 };
+
+template <typename T>
+binarySearchTree<T>::binarySearchTree():mRoot(nullptr) {
+}
 
 template <typename T>
 binarySearchTree<T>::binarySearchTree(const T data) {
@@ -84,7 +105,10 @@ void binarySearchTree<T>::insert(binaryNode<T>* root, binaryNode<T>* node) {
 template <typename T>
 void binarySearchTree<T>::insert(T data) {
     binaryNode<T>* node = new binaryNode<T>(data);
-    insert(mRoot, node);
+    if (!mRoot)
+        mRoot = node;
+    else
+        insert(mRoot, node);
 }
 
 
@@ -93,13 +117,15 @@ void binarySearchTree<T>::traverse(binaryNode<T>* root) {
     if (!root)
         return;
     traverse(root->mLeft);
-    cout<<"data = "<<root->mData<<endl;
+    cout<<root->mData<<", ";
     traverse(root->mRight);
 }
 
 template <typename T>
 void binarySearchTree<T>::traverse() {
+    cout<<"In-order traversal: ";
     traverse(mRoot);
+    cout<<endl;
 }
 
 template <typename T>
@@ -166,6 +192,27 @@ int binarySearchTree<T>::isTreeBalanced(binaryNode<T>* root) {
 template <typename T>
 int binarySearchTree<T>::isTreeBalanced() {
     return isTreeBalanced(mRoot);
+}
+
+template <typename T>
+int binarySearchTree<T>::test() {
+    cout<<"Testing binary search tree...\n";
+    insert(5);
+    insert(10);
+    insert(11);
+    insert(2);
+    insert(3);
+    insert(18);
+    insert(4);
+    insert(15);
+    traverse();
+    cout<<"Depth of the binary search tree is: "<<depth()<<endl;
+    cout<<"Min depth of the binary search tree is: "<<minDepth()<<endl;
+    cout<<"Number of nodes in the binary search tree are: "<<numNodes()<<endl;
+    cout<<"Number of leaf nodes in the binary search tree are: "<<numLeafNodes()<<endl;
+    cout<<"Is tree balanced: "<<isTreeBalanced()<<endl;
+    cout<<"Binary search tree testing done.\n";
+    return 0;
 }
 
 #endif /* defined(__trees__binarySearchTree__) */
