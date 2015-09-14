@@ -1,2 +1,2 @@
-# algorithms
-Algorithms implemented in C++
+# Datastructures
+Some important datastructures implemented in C++
