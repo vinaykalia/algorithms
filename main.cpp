@@ -11,6 +11,7 @@
 #include "trie.h"
 #include "sll.h"
 #include "dll.h"
+#include "stack.h"
 
 int main(int argc, const char * argv[]) {
     class testable *t = new sll<int>();
@@ -20,5 +21,7 @@ int main(int argc, const char * argv[]) {
     t = new trie<char>();
     t->test();
     t = new binarySearchTree<int>();
+    t->test();
+    t = new stack<int>();
     t->test();
 }

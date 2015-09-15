@@ -33,6 +33,9 @@ public:
     sll(T data);
     ~sll();
     int addTail(T data);
+    int addHead(T data);
+    T getHead();
+    bool isEmpty();
     void reverse();
     void print();
     int test();
@@ -93,6 +96,35 @@ void sll<T>::reverse() {
     sllNode<T> *newHead;
     reverse(mHead, &newHead);
     mHead = newHead;
+}
+
+template <typename T>
+int sll<T>::addHead(T data) {
+    sllNode<T> *node = new sllNode<T>(data);
+    if (!mHead) {
+        mHead = node;
+    } else {
+        node->mNext = mHead;
+        mHead = node;
+    }
+    return 0;
+}
+
+template <typename T>
+T sll<T>::getHead() {
+    if (!mHead)
+        return static_cast<T>(0);
+    
+    sllNode<T> *tmp = mHead;
+    T data = tmp->mData;
+    mHead = mHead->mNext;
+    delete tmp;
+    return data;
+}
+
+template <typename T>
+bool sll<T>::isEmpty() {
+    return mHead?false:true;
 }
 
 template <typename T>
