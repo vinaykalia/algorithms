@@ -12,6 +12,7 @@
 #include "sll.h"
 #include "dll.h"
 #include "stack.h"
+#include "queue.h"
 
 int main(int argc, const char * argv[]) {
     class testable *t = new sll<int>();
@@ -23,5 +24,7 @@ int main(int argc, const char * argv[]) {
     t = new binarySearchTree<int>();
     t->test();
     t = new stack<int>();
+    t->test();
+    t = new queue<int>();
     t->test();
 }
